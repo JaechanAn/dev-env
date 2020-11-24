@@ -16,11 +16,12 @@ Plugin 'scrooloose/nerdtree' " file system explorer
 Plugin 'majutsushi/tagbar' " tagbar for ctags
 Plugin 'octol/vim-cpp-enhanced-highlight' " cpp highlighter
 Plugin 'tpope/vim-surround' " easy quote surround
-Plugin 'kien/ctrlp.vim' " Fuzzy file, buffer, tag, etc finder 
-Plugin 'scrooloose/syntastic' " syntax check
+"Plugin 'scrooloose/syntastic' " syntax check
 Plugin 'scrooloose/nerdcommenter' " commenter
 Plugin 'chiel92/vim-autoformat' " formatter
 Plugin 'valloric/youcompleteme' " code completer
+Plugin 'christoomey/vim-tmux-navigator' " vim-tmux navigation
+Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag, etc finder
 
 """ Google code formatter
 "Plugin 'google/vim-maktaba'
@@ -46,10 +47,26 @@ filetype plugin indent on    " required
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Shortcuts:
+"    -> YouCompleteMe
 "    -> NerdTree
 "    -> Tagbar
 "    -> vim-autoformat
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Code completion, navigation
+let g:ycm_show_diagnostics_ui = 0
+
+map <C-j>f :YcmCompleter GoTo<CR>
+map <C-j>d :YcmCompleter GoToDefinition<CR>
+map <C-j>r :YcmCompleter GoToReferences<CR>
+map <C-j>i :YcmCompleter GoToInclude<CR>
+map <C-j>t :YcmCompleter GetType<CR>
+map <C-j>s :YcmCompleter GoToSymbol
+
+highlight Pmenu ctermfg=15 ctermbg=0 guifg=#ffffff guibg=#000000
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -62,15 +79,24 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeIgnore = ['\.o$']
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tagbar 
+" Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Shortcut for opening Tagbar 
-nmap <C-m> :TagbarToggle<CR>
+" Shortcut for opening Tagbar
+"nmap <C-m> :TagbarToggle<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-airline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tabline integration
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
+" Maintainer:
 "       Amir Salihefendic — @amix3k
 "
 " Awesome_version:
@@ -115,7 +141,7 @@ let mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
@@ -139,7 +165,7 @@ augroup END
 set so=7
 
 " Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
+let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
@@ -171,23 +197,23 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -211,7 +237,7 @@ set foldcolumn=1
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 " For vim Dracula
 set termguicolors
@@ -312,8 +338,9 @@ map <leader>h :bprevious<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+"map <leader> :tabnext<cr>
+"map <C-m> :tabprevious<cr>
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -328,7 +355,7 @@ map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -445,7 +472,7 @@ endfunction
 
 function! CmdLine(str)
   call feedkeys(":" . a:str)
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
   let l:saved_reg = @"
@@ -463,6 +490,11 @@ function! VisualSelection(direction, extra_filter) range
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
+
+" Google code formatter
+" augroup autoformat_settings
+"  autocmd FileType c,cpp AutoFormatBuffer clang-format
+" augroup END
 
 if has("cscope")
   set cscopetag
@@ -502,7 +534,4 @@ if has("cscope")
   nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
-" Google code formatter
-" augroup autoformat_settings
-"  autocmd FileType c,cpp AutoFormatBuffer clang-format
-" augroup END
+
