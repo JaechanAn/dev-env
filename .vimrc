@@ -16,6 +16,7 @@ Plugin 'scrooloose/nerdtree' " file system explorer
 Plugin 'majutsushi/tagbar' " tagbar for ctags
 Plugin 'octol/vim-cpp-enhanced-highlight' " cpp highlighter
 Plugin 'tpope/vim-surround' " easy quote surround
+"Plugin 'kien/ctrlp.vim' " Fuzzy file, buffer, tag, etc finder
 "Plugin 'scrooloose/syntastic' " syntax check
 Plugin 'scrooloose/nerdcommenter' " commenter
 Plugin 'chiel92/vim-autoformat' " formatter
@@ -84,7 +85,7 @@ let NERDTreeIgnore = ['\.o$']
 " Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Shortcut for opening Tagbar
-"nmap <C-m> :TagbarToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -94,6 +95,12 @@ let NERDTreeIgnore = ['\.o$']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-airline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Shortcut for autoformat
+map <C-f> :Autoformat<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer:
