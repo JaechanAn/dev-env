@@ -297,6 +297,9 @@ bind-key C-n next-window
 bind-key C-p previous-window
 bind-key C-b last-window
 
+bind-key v split-window -v
+bind-key h split-window -h
+
 # vim-tmux-navigator
 is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
     | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"

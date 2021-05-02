@@ -20,9 +20,10 @@ Plugin 'tpope/vim-surround' " easy quote surround
 "Plugin 'scrooloose/syntastic' " syntax check
 Plugin 'scrooloose/nerdcommenter' " commenter
 Plugin 'chiel92/vim-autoformat' " formatter
-Plugin 'valloric/youcompleteme' " code completer
+"Plugin 'valloric/youcompleteme' " code completer
 Plugin 'christoomey/vim-tmux-navigator' " vim-tmux navigation
 Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag, etc finder
+Plugin 'embear/vim-localvimrc' " local vimrc integrator
 
 """ Google code formatter
 "Plugin 'google/vim-maktaba'
@@ -63,7 +64,7 @@ let g:ycm_show_diagnostics_ui = 0
 map <C-j>f :YcmCompleter GoTo<CR>
 map <C-j>d :YcmCompleter GoToDefinition<CR>
 map <C-j>r :YcmCompleter GoToReferences<CR>
-map <C-j>i :YcmCompleter GoToInclude<CR>
+map <C-j>i :YcmCompleter GoToImplementation<CR>
 map <C-j>t :YcmCompleter GetType<CR>
 map <C-j>s :YcmCompleter GoToSymbol
 
@@ -97,7 +98,7 @@ let g:airline_powerline_fonts = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-airline
+" Autoformat
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Shortcut for autoformat
 map <C-f> :Autoformat<CR>
@@ -159,6 +160,7 @@ let g:termdebug_wide = 163
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Show relative line numbers
+"set number 
 set number relativenumber
 
 augroup numbertoggle
@@ -166,7 +168,7 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
-" set n
+"set n
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
@@ -521,6 +523,7 @@ if has("cscope")
   nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
   nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
   nmap <C-\>d :cs find d ^<C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>r :!mkcscope.sh<CR>:cs reset<CR><CR>
 
   nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
   nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
