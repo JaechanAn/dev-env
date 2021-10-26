@@ -9,21 +9,20 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-airline/vim-airline' " status/tabline
-Plugin 'vim-airline/vim-airline-themes' " thems for vim-airline
-Plugin 'tpope/vim-fugitive' " git wrapper
-Plugin 'scrooloose/nerdtree' " file system explorer
-Plugin 'majutsushi/tagbar' " tagbar for ctags
+Plugin 'vim-airline/vim-airline'          " status/tabline
+Plugin 'vim-airline/vim-airline-themes'   " thems for vim-airline
+Plugin 'tpope/vim-fugitive'               " git wrapper
+Plugin 'scrooloose/nerdtree'              " file system explorer
+Plugin 'majutsushi/tagbar'                " tagbar for ctags
 Plugin 'octol/vim-cpp-enhanced-highlight' " cpp highlighter
-Plugin 'tpope/vim-surround' " easy quote surround
-"Plugin 'kien/ctrlp.vim' " Fuzzy file, buffer, tag, etc finder
-"Plugin 'scrooloose/syntastic' " syntax check
-Plugin 'scrooloose/nerdcommenter' " commenter
-Plugin 'chiel92/vim-autoformat' " formatter
-"Plugin 'valloric/youcompleteme' " code completer
-Plugin 'christoomey/vim-tmux-navigator' " vim-tmux navigation
-Plugin 'ctrlpvim/ctrlp.vim' " fuzzy file, buffer, mru, tag, etc finder
-Plugin 'embear/vim-localvimrc' " local vimrc integrator
+Plugin 'tpope/vim-surround'               " easy quote surround
+Plugin 'scrooloose/nerdcommenter'         " commenter
+Plugin 'chiel92/vim-autoformat'           " formatter
+Plugin 'valloric/youcompleteme'           " code completer
+Plugin 'christoomey/vim-tmux-navigator'   " vim-tmux navigation
+Plugin 'ctrlpvim/ctrlp.vim'               " fuzzy file, buffer, mru, tag, etc finder
+Plugin 'embear/vim-localvimrc'            " local vimrc integrator
+Plugin 'puremourning/vimspector'          " vim + debug
 
 """ Google code formatter
 "Plugin 'google/vim-maktaba'
@@ -53,6 +52,7 @@ filetype plugin indent on    " required
 "    -> NerdTree
 "    -> Tagbar
 "    -> vim-autoformat
+"    -> Local vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -102,6 +102,25 @@ let g:airline_powerline_fonts = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Shortcut for autoformat
 map <C-f> :Autoformat<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vimspector
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Human settings for Ctrl-Shift-F
+let g:vimspector_enable_mappings = 'HUMAN'
+
+" This must be at the end of Vimspector config
+"packadd! vimspector
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vimspector
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Human settings for Ctrl-Shift-F
+let g:localvimrc_enable = 1 " 0 disable, 1 enable
+let g:localvimrc_ask = 0 " 0 do not ask, 1 ask
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer:
@@ -160,7 +179,7 @@ let g:termdebug_wide = 163
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Show relative line numbers
-"set number 
+"set number
 set number relativenumber
 
 augroup numbertoggle
