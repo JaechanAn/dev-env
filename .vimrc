@@ -103,6 +103,8 @@ let g:airline_powerline_fonts = 1
 " Shortcut for autoformat
 map <C-f> :Autoformat<CR>
 
+let g:formatter_yapf_style = 'google'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vimspector
@@ -111,7 +113,7 @@ map <C-f> :Autoformat<CR>
 let g:vimspector_enable_mappings = 'HUMAN'
 
 " This must be at the end of Vimspector config
-"packadd! vimspector
+packadd! vimspector
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -119,7 +121,7 @@ let g:vimspector_enable_mappings = 'HUMAN'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Human settings for Ctrl-Shift-F
 let g:localvimrc_enable = 1 " 0 disable, 1 enable
-let g:localvimrc_ask = 0 " 0 do not ask, 1 ask
+let g:localvimrc_ask = 1 " 0 do not ask, 1 ask
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

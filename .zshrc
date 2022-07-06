@@ -120,3 +120,6 @@ fi
 
 export LD_PRELOAD=$LD_PRELOAD:/usr/lib/x86_64-linux-gnu/libjemalloc.so
 export YCSB_HOME=/home/jaechan/benchmark/ycsb-0.17.0
+export _JAVA_OPTIONS=-Xmx255g
+export ODBCINI=/etc/odbc.ini
+export ODBCSYSINI=/etc
